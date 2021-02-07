@@ -1,0 +1,105 @@
+
+running 1 test
+0
+bridges for HO
+replaced H with e
+replaced HO with H
+replaced O with e
+bridges for OH
+replaced O with e
+replaced OH with H
+replaced H with e
+1
+bridges for ee
+bridges for ee
+bridges for eH
+bridges for ee
+bridges for ee
+bridges for eH
+bridges for eH
+replaced H with e
+bridges for eO
+train eO was redundant!
+bridges for He
+replaced H with e
+bridges for HH
+replaced H with e
+replaced HH with O
+train HH was redundant!
+bridges for He
+bridges for ee
+bridges for eH
+bridges for He
+bridges for ee
+bridges for eH
+bridges for He
+bridges for HH
+replaced HH with O
+replaced H with e
+bridges for HO
+bridges for Oe
+bridges for OH
+2
+bridges for ee
+bridges for ee
+bridges for eH
+bridges for ee
+bridges for ee
+bridges for eH
+bridges for ee
+bridges for ee
+bridges for eH
+bridges for eO
+train eO was redundant!
+bridges for ee
+bridges for eH
+train eH was redundant!
+bridges for ee
+bridges for eH
+train eH was redundant!
+bridges for O
+replaced O with e
+bridges for He
+bridges for HH
+train HH was redundant!
+bridges for O
+replaced O with e
+bridges for He
+bridges for ee
+bridges for eH
+bridges for He
+bridges for ee
+bridges for eH
+bridges for He
+bridges for He
+bridges for HH
+bridges for HO
+bridges for Oe
+bridges for OH
+3
+bridges for ee
+bridges for ee
+bridges for eH
+bridges for ee
+bridges for ee
+bridges for eH
+bridges for ee
+bridges for ee
+bridges for eH
+bridges for eO
+train eO was redundant!
+bridges for ee
+bridges for eH
+train eH was redundant!
+bridges for ee
+bridges for eH
+train eH was redundant!
+test day19_nodes::will_it_work ... FAILED
+
+failures:
+
+failures:
+    day19_nodes::will_it_work
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 21 filtered out
+

@@ -1,0 +1,18 @@
+[package]
+name = "aoc_2020"
+version = "0.1.0"
+authors = ["Michael Debertol <michael.debertol@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+aoc-runner = "0.3.0"
+aoc-runner-derive = "0.3.0"
+fxhash = "0.2.1"
+bitvec = "0.19.4"
+regex = "1.4.2"
+lazy_static = "1.4.0"
+multimap = "0.8.2"
+euclid = "0.22.1"
+ring-algorithm = "0.2.2"
