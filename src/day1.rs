@@ -1,6 +1,6 @@
 #[aoc(day1, part1)]
 fn part1(input: &str) -> i32 {
-    let input: Vec<i32> = input.split("\n").map(|s| s.parse().unwrap()).collect();
+    let input: Vec<i32> = input.split('\n').map(|s| s.parse().unwrap()).collect();
     for &a in input.iter() {
         if a >= 2020 / 2 {
             continue;
@@ -14,7 +14,7 @@ fn part1(input: &str) -> i32 {
 }
 #[aoc(day1, part2)]
 fn part2(input: &str) -> i32 {
-    let mut vec: Vec<i32> = input.split("\n").map(|s| s.parse().unwrap()).collect();
+    let mut vec: Vec<i32> = input.split('\n').map(|s| s.parse().unwrap()).collect();
     vec.sort_unstable();
     for &a in vec.iter() {
         for &b in vec.iter() {

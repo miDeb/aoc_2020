@@ -26,34 +26,26 @@ fn part2(input: &str) -> usize {
 fn parse_pass(pass: &str) -> HashMap<&str, &str> {
     pass.split_whitespace()
         .map(|p| {
-            let mut s = p.split(":");
+            let mut s = p.split(':');
             (s.next().unwrap(), s.next().unwrap())
         })
         .collect()
 }
 
 fn validate(pass: &HashMap<&str, &str>) -> bool {
-    if !pass["byr"]
+    pass["byr"]
         .parse::<u32>()
         .map_or(false, |p| (1920..=2002).contains(&p))
-    {
-        false
-    } else if !pass["eyr"]
-        .parse::<u32>()
-        .map_or(false, |p| (2020..=2030).contains(&p))
-    {
-        false
-    } else if !pass["iyr"]
-        .parse::<u32>()
-        .map_or(false, |p| (2010..=2020).contains(&p))
-    {
-        false
-    } else {
-        valid_height(pass["hgt"])
-            && valid_color(pass["hcl"])
-            && VALID_E_COLORS.contains(&pass["ecl"])
-            && valid_pid(pass["pid"])
-    }
+        && pass["eyr"]
+            .parse::<u32>()
+            .map_or(false, |p| (2020..=2030).contains(&p))
+        && pass["iyr"]
+            .parse::<u32>()
+            .map_or(false, |p| (2010..=2020).contains(&p))
+        && valid_height(pass["hgt"])
+        && valid_color(pass["hcl"])
+        && VALID_E_COLORS.contains(&pass["ecl"])
+        && valid_pid(pass["pid"])
 }
 
 fn valid_height(h: &str) -> bool {

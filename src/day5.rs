@@ -28,30 +28,26 @@ fn get_id(seat: &str) -> usize {
 
 fn get_row(row: &str) -> usize {
     let mut r = 0;
-    let mut n = 0;
-    for char in row.chars().rev() {
+    for (n, char) in row.chars().rev().enumerate() {
         let bin = match char {
             'F' => 0,
             'B' => 1,
             _ => panic!(),
         };
         r |= bin << n;
-        n += 1;
     }
     r
 }
 
 fn get_column(column: &str) -> usize {
     let mut c = 0;
-    let mut n = 0;
-    for char in column.chars().rev() {
+    for (n, char) in column.chars().rev().enumerate() {
         let bin = match char {
             'L' => 0,
             'R' => 1,
             _ => panic!(),
         };
         c |= bin << n;
-        n += 1;
     }
     c
 }

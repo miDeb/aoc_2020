@@ -17,7 +17,7 @@ fn part2(input: &str) -> usize {
 
 fn parse_pass(pass: &str) -> Pass {
     let mut components = pass.split_ascii_whitespace();
-    let mut from_to = components.next().unwrap().split("-");
+    let mut from_to = components.next().unwrap().split('-');
     let c = components.next().unwrap().chars().next().unwrap();
     let str = components.next().unwrap();
     Pass {

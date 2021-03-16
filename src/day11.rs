@@ -23,13 +23,7 @@ fn occupied_after_all_moves(mut grid: Grid) -> usize {
             return grid
                 .grid
                 .iter()
-                .filter(|e| {
-                    if let Position::Occupied = e {
-                        true
-                    } else {
-                        false
-                    }
-                })
+                .filter(|e| matches!(e, Position::Occupied))
                 .count();
         }
     }
@@ -43,13 +37,7 @@ fn occupied_after_all_moves2(mut grid: Grid) -> usize {
             return grid
                 .grid
                 .iter()
-                .filter(|e| {
-                    if let Position::Occupied = e {
-                        true
-                    } else {
-                        false
-                    }
-                })
+                .filter(|e| matches!(e, Position::Occupied))
                 .count();
         }
     }

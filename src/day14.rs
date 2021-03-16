@@ -81,16 +81,13 @@ fn write_to_masked_address(memory: &mut FxHashMap<u64, u64>, addr: u64, mask: &s
 
     let mut to_push = vec![];
     for (idx, char) in mask.chars().rev().enumerate() {
-        match char {
-            'X' => {
-                for &address in &addresses {
-                    let address = address | (1 << idx);
-                    memory.insert(address, payload);
-                    to_push.push(address);
-                }
-                addresses.append(&mut to_push);
+        if char == 'X' {
+            for &address in &addresses {
+                let address = address | (1 << idx);
+                memory.insert(address, payload);
+                to_push.push(address);
             }
-            _ => {}
+            addresses.append(&mut to_push);
         }
     }
     assert_eq!(addresses.len(), 2usize.pow(x_count));
