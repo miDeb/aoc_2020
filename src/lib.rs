@@ -1,6 +1,3 @@
-#![feature(min_const_generics)]
-#![feature(const_in_array_repeat_expressions)]
-#![feature(deque_range)]
 #![feature(destructuring_assignment)]
 #![feature(str_split_once)]
 
