@@ -85,15 +85,13 @@ impl<const P: Priorities> AstNode<P> {
     fn append(mut self, op: &str, rhs: Box<AstNode<P>>) -> AstNode<P> {
         if self.priority() >= AstNode::<P>::op_priority(op) {
             AstNode::from_op(Box::new(self), op, rhs)
+        } else if let AstNode::Times(_, prev_rhs) = &mut self {
+            let mut tmp = AstNode::<P>::Number(-1);
+            mem::swap(&mut tmp, prev_rhs);
+            *prev_rhs = Box::new(AstNode::from_op(Box::new(tmp), op, rhs));
+            self
         } else {
-            if let AstNode::Times(_, prev_rhs) = &mut self {
-                let mut tmp = AstNode::<P>::Number(-1);
-                mem::swap(&mut tmp, prev_rhs);
-                *prev_rhs = Box::new(AstNode::from_op(Box::new(tmp), op, rhs));
-                self
-            } else {
-                unreachable!();
-            }
+            unreachable!();
         }
     }
 
@@ -134,12 +132,10 @@ impl<'a> Tokenizer<'a> {
                 let token = &self.remaining[..to];
                 Some(token)
             }
+        } else if self.remaining.is_empty() {
+            None
         } else {
-            if self.remaining.is_empty() {
-                None
-            } else {
-                Some(self.remaining)
-            }
+            Some(self.remaining)
         }
     }
 }
@@ -159,14 +155,12 @@ impl<'a> Iterator for Tokenizer<'a> {
                 self.remaining = &self.remaining[to..].trim_start();
                 Some(token)
             }
+        } else if self.remaining.is_empty() {
+            None
         } else {
-            if self.remaining.is_empty() {
-                None
-            } else {
-                let token = self.remaining;
-                self.remaining = "";
-                Some(token)
-            }
+            let token = self.remaining;
+            self.remaining = "";
+            Some(token)
         }
     }
 }

@@ -79,11 +79,11 @@ fn neighbors<const N: usize>(
         } else {
             i
         };
-        for dimension in 0..N {
+        for (dimension, coordinate) in coordinates.iter_mut().enumerate() {
             match (i / 3usize.pow(dimension as u32)) % 3 {
-                0 => coordinates[dimension] -= 1,
+                0 => *coordinate -= 1,
                 1 => {}
-                2 => coordinates[dimension] += 1,
+                2 => *coordinate += 1,
                 _ => unreachable!(),
             }
         }
@@ -112,7 +112,7 @@ where
             active_neighbors.nth(1).is_some() && active_neighbors.nth(1).is_none()
         } else {
             // cube is currently inactive and should become active if 3 neighbors are active
-            active_neighbors.nth(2).is_some() && active_neighbors.nth(0).is_none()
+            active_neighbors.nth(2).is_some() && active_neighbors.next().is_none()
         }
     }
 

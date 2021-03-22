@@ -75,7 +75,7 @@ fn parse_rule(line: &str, part2: bool) -> (usize, Rule) {
             body = "42 31 | 42 11 31";
         }
     }
-    let rule = if body.starts_with("\"") {
+    let rule = if body.starts_with('"') {
         Rule::Letter(body.chars().nth(1).unwrap())
     } else {
         let mut tokens = body.split(' ');
