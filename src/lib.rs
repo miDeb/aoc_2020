@@ -1,3 +1,4 @@
+#![allow(incomplete_features)]
 #![feature(destructuring_assignment)]
 #![feature(const_generics)]
 #![feature(const_evaluatable_checked)]

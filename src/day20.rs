@@ -5,7 +5,7 @@ use fxhash::{FxHashMap, FxHashSet};
 #[aoc(day20, part1)]
 fn part1(input: &str) -> u64 {
     let tiles = solve(input.split("\n\n").map(Tile::from).collect());
-    edges_product(&tiles)
+    corners_product(&tiles)
 }
 
 #[aoc(day20, part2)]
@@ -252,13 +252,14 @@ impl Display for Tile {
 }
 
 fn solve(mut initial_tiles: Vec<Tile>) -> Vec<Tile> {
-    let mut all_edges = FxHashMap::<String, (u64, u8)>::default();
+    let mut all_edges = FxHashMap::<String, (u64, u8, bool)>::default();
     let mut tiles = FxHashMap::<u64, Tile>::default();
     let mut debug_coordinates = FxHashSet::<(i32, i32)>::default();
     debug_coordinates.insert((0, 0));
+
     loop {
         let tile = {
-            if let Some((tile_idx, flipped, rotation_self, &(other, rotation_other))) =
+            if let Some((tile_idx, rotation_self, &(other, rotation_other, reversed_other))) =
                 initial_tiles
                     .iter()
                     .enumerate()
@@ -267,19 +268,15 @@ fn solve(mut initial_tiles: Vec<Tile>) -> Vec<Tile> {
                             .iter()
                             .enumerate()
                             .find_map(|(rotation_self, edge)| {
-                                if let Some(other) = all_edges.get(edge) {
-                                    Some((tile_idx, false, rotation_self, other))
-                                } else {
-                                    all_edges
-                                        .get(&edge.chars().rev().collect::<String>())
-                                        .map(|other| (tile_idx, true, rotation_self, other))
-                                }
+                                all_edges
+                                    .get(edge)
+                                    .map(|other| (tile_idx, rotation_self, other))
                             })
                     })
             {
                 let mut tile = initial_tiles.remove(tile_idx);
                 let mut rotation_distance = -(rotation_self as i8) + (rotation_other as i8) + 2;
-                let should_flip = !flipped;
+                let should_flip = !reversed_other;
                 if should_flip && rotation_self % 2 == 1 {
                     // flips are around a vertical axis
                     rotation_distance += 2;
@@ -313,8 +310,14 @@ fn solve(mut initial_tiles: Vec<Tile>) -> Vec<Tile> {
             tile.edges
                 .iter()
                 .enumerate()
-                .map(|(rotation, edge)| (edge.to_owned(), (tile.id, rotation as u8))),
+                .map(|(rotation, edge)| (edge.to_owned(), (tile.id, rotation as u8, false))),
         );
+        all_edges.extend(tile.edges.iter().enumerate().map(|(rotation, edge)| {
+            (
+                edge.chars().rev().collect(),
+                (tile.id, rotation as u8, true),
+            )
+        }));
         assert!(tiles.insert(tile.id, tile).is_none());
         if initial_tiles.is_empty() {
             break;
@@ -350,7 +353,7 @@ where
     [x_min, x_max, y_min, y_max]
 }
 
-fn edges_product(tiles: &[Tile]) -> u64 {
+fn corners_product(tiles: &[Tile]) -> u64 {
     let [x_min, x_max, y_min, y_max] = min_max_coordinates(tiles.iter());
     let corners: Vec<u64> = tiles
         .iter()
@@ -493,5 +496,5 @@ fn real1() {
 #[test]
 fn real2() {
     let input = std::fs::read_to_string("input/2020/day20.txt").unwrap();
-    part2(input.trim());
+    assert_eq!(part2(input.trim()), 1946);
 }
