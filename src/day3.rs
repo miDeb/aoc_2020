@@ -56,9 +56,9 @@ impl Map {
         }
         let width = grid.len() / height;
         Self {
-            grid,
             width,
             height,
+            grid,
         }
     }
 

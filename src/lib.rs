@@ -1,7 +1,8 @@
 #![feature(destructuring_assignment)]
-#![feature(str_split_once)]
 #![feature(const_generics)]
 #![feature(const_evaluatable_checked)]
+#![feature(map_into_keys_values)]
+
 extern crate aoc_runner;
 
 #[macro_use]
@@ -19,6 +20,7 @@ mod day17;
 mod day18;
 mod day19;
 mod day2;
+mod day20;
 mod day3;
 mod day4;
 mod day5;
