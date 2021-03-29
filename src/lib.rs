@@ -3,6 +3,7 @@
 #![feature(const_generics)]
 #![feature(const_evaluatable_checked)]
 #![feature(map_into_keys_values)]
+#![feature(iter_intersperse)]
 
 extern crate aoc_runner;
 
@@ -29,5 +30,6 @@ mod day6;
 mod day7;
 mod day8;
 mod day9;
+mod day21;
 
 aoc_lib! { year = 2020 }
